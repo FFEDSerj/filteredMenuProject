@@ -1,5 +1,7 @@
 import menu from './menu.js'
 
+const Jay = 'Hello my dear friend!';
+
 document.addEventListener('DOMContentLoaded', () => {
   getMenuTemplate(menu)
   displayButtons()
