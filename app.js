@@ -3,9 +3,9 @@ import menu from './menu.js'
 const Jay = 'Hello my dear friend!';
 
 document.addEventListener('DOMContentLoaded', () => {
-  getMenuTemplate(menu)
-  displayButtons()
-})
+  getMenuTemplate(menu);
+  displayButtons();
+});
 
 const menuBody = document.querySelector('.menu__section-center');
 
@@ -39,26 +39,33 @@ const displayFilteredMenu = (arr, action) => {
 
 const filterContainer = document.querySelector('.menu__btn-container');
 
-filterContainer.addEventListener('click', (e) => {
-  if (e.target.classList.contains('menu__filter-btn')) {
-    const filter = e.target.dataset.filter;
-    displayFilteredMenu(menu, filter);
-  }
-})
-
 function displayButtons() {
   const categoryButtons = menu
     .reduce((acc, { category }) => {
       if (!acc.includes(category)) acc.push(category)
       return acc
     }, ['all'])
-    .map(category =>
-      `<button type="button" class="menu__filter-btn" data-filter="${category}">${category}</button>`
-    )
+    .map(category => {
+      if (category === 'all') {
+        return `<button type="button" class="menu__filter-btn active" data-filter="${category}">${category}</button>`
+      }
+      return `<button type="button" class="menu__filter-btn" data-filter="${category}">${category}</button>`
+    })
     .join('');
 
   filterContainer.innerHTML = categoryButtons;
 }
+
+
+filterContainer.addEventListener('click', (e) => {
+  if (e.target.classList.contains('menu__filter-btn')) {
+    const filter = e.target.dataset.filter;
+    displayFilteredMenu(menu, filter);
+    const buttons = document.querySelectorAll('.menu__filter-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    e.target.classList.add('active')
+  }
+})
 
 
 

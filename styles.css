@@ -204,6 +204,10 @@ Menu
   cursor: pointer;
   transition: var(--transition);
 }
+.menu__filter-btn.active {
+  background: var(--clr-gold);
+  color: var(--clr-white);
+}
 .menu__filter-btn:hover {
   background: var(--clr-gold);
   color: var(--clr-white);
